@@ -15,10 +15,12 @@ const prisma_service_1 = require("../prisma/prisma.service");
 const argon = require("argon2");
 const library_1 = require("@prisma/client/runtime/library");
 const jwt_1 = require("@nestjs/jwt");
+const config_1 = require("@nestjs/config");
 let AuthService = class AuthService {
-    constructor(prisma, jwt) {
+    constructor(prisma, jwt, config) {
         this.prisma = prisma;
         this.jwt = jwt;
+        this.config = config;
     }
     async login(dto) {
         const user = await this.prisma.user.findUnique({
@@ -66,7 +68,7 @@ let AuthService = class AuthService {
         return {
             access_token: await this.jwt.signAsync(payload, {
                 expiresIn: '15m',
-                secret: process.env.JWT_SECRET,
+                secret: this.config.get('JWT_SECRET'),
             }),
         };
     }
@@ -75,6 +77,7 @@ exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)({}),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService,
-        jwt_1.JwtService])
+        jwt_1.JwtService,
+        config_1.ConfigService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map
