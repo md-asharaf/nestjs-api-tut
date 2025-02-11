@@ -12,12 +12,12 @@ export declare class AuthService {
     }>;
     signup(dto: AuthDto): Promise<{
         user: {
+            email: string;
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            email: string;
-            firstname: string | null;
-            lastname: string | null;
+            firstName: string | null;
+            lastName: string | null;
         };
     }>;
     signToken(userId: number, email: string): Promise<{

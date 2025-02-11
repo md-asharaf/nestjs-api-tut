@@ -8,12 +8,12 @@ export declare class AuthController {
     }>;
     signup(dto: AuthDto): Promise<{
         user: {
+            email: string;
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            email: string;
-            firstname: string | null;
-            lastname: string | null;
+            firstName: string | null;
+            lastName: string | null;
         };
     }>;
 }

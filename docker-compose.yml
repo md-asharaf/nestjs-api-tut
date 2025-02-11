@@ -1,8 +1,18 @@
 services:
-  database:
+  dev-db:
     image: postgres:13
     ports:
-      - "5432:5432"
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: nest-user
+      POSTGRES_PASSWORD: nest-pass
+      POSTGRES_DB: nest-db
+    networks:
+      - nest
+  test-db:
+    image: postgres:13
+    ports:
+      - '5433:5432'
     environment:
       POSTGRES_USER: nest-user
       POSTGRES_PASSWORD: nest-pass
